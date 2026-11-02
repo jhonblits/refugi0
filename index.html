@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Un refugio para ti</title>
+  <meta name="description" content="Un rincón tranquilo, hecho para ti.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#14123A">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B7%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Figtree:wght@400;500;700&family=Young+Serif&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <noscript><style>.revela { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+<body>
+
+  <!-- Cielo: estrellas y luciérnagas -->
+  <div class="cielo" aria-hidden="true">
+    <div class="estrellas" id="estrellas"></div>
+    <div class="luciernagas" id="luciernagas"></div>
+  </div>
+
+  <main>
+
+    <!-- INICIO -->
+    <header class="seccion hero" id="inicio">
+      <div class="luna revela" id="luna"></div>
+      <h1 class="revela" id="titulo" style="--r:.15s">Respira.<br>Aquí estoy.</h1>
+      <p class="lead revela" id="intro" style="--r:.3s"></p>
+      <a class="entrar revela" href="#respira" style="--r:.45s">Entrar<span class="flecha" aria-hidden="true"></span></a>
+    </header>
+
+    <!-- RESPIRA -->
+    <section class="seccion" id="respira" aria-labelledby="tRespira">
+      <div class="contenedor centro">
+        <h2 id="tRespira" class="revela"></h2>
+        <p class="lead revela" id="pRespira"></p>
+        <div class="aire-caja revela">
+          <div class="aire" id="aire"></div>
+          <span class="aire-texto" id="aireTexto" aria-live="polite">Listos</span>
+        </div>
+        <button class="boton" id="btnAire" type="button">Empezar</button>
+      </div>
+    </section>
+
+    <!-- CÓMO TE SIENTES -->
+    <section class="seccion" id="sentir" aria-labelledby="tSentir">
+      <div class="contenedor centro">
+        <h2 id="tSentir" class="revela"></h2>
+        <p class="lead revela" id="pSentir"></p>
+        <div class="chips revela" id="chips" role="group" aria-label="Cómo te sientes hoy"></div>
+        <article class="mensaje" id="mensaje" aria-live="polite" hidden>
+          <h3 id="mTitulo"></h3>
+          <p id="mTexto"></p>
+          <p class="gesto" id="mGesto"></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ÁBRELO CUANDO -->
+    <section class="seccion" id="abre" aria-labelledby="tAbre">
+      <div class="contenedor centro">
+        <h2 id="tAbre" class="revela"></h2>
+        <p class="lead revela" id="pAbre"></p>
+        <div class="sobres" id="sobres"></div>
+      </div>
+    </section>
+
+    <!-- LO QUE VEO EN TI -->
+    <section class="seccion" id="veo" aria-labelledby="tVeo">
+      <div class="contenedor">
+        <div class="centro">
+          <h2 id="tVeo" class="revela"></h2>
+          <p class="lead revela" id="pVeo"></p>
+        </div>
+        <div class="postales" id="postales"></div>
+      </div>
+    </section>
+
+    <!-- JARDÍN -->
+    <section class="seccion alba" id="jardin" aria-labelledby="tJardin">
+      <div class="contenedor centro">
+        <h2 id="tJardin" class="revela"></h2>
+        <p class="lead revela" id="pJardin"></p>
+        <div class="jardin" id="jardinTulipanes" role="img" aria-label="Cinco tulipanes de colores creciendo"></div>
+      </div>
+    </section>
+
+    <!-- PROMESAS -->
+    <section class="seccion alba" id="promesas" aria-labelledby="tPromesas">
+      <div class="contenedor">
+        <h2 id="tPromesas" class="revela centro"></h2>
+        <ul class="promesas" id="listaPromesas"></ul>
+      </div>
+    </section>
+
+    <!-- FINAL: amanecer -->
+    <footer class="final" id="final">
+      <div class="amanecer" id="amanecer" aria-hidden="true"><div class="sol"></div></div>
+      <div class="colina">
+        <div class="contenedor centro">
+          <div class="foto-redonda revela" id="fotoFinal"></div>
+          <h2 id="tFinal" class="revela"></h2>
+          <p class="lead revela" id="pFinal"></p>
+          <button class="boton boton-calido" id="btnAbrazo" type="button"></button>
+          <p class="abrazo-msg" id="abrazoMsg" aria-live="polite"></p>
+          <p class="ayuda" id="ayuda"></p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Carta "Ábrelo cuando…" -->
+  <dialog id="carta" aria-labelledby="cartaTitulo">
+    <div class="papel">
+      <button class="cerrar" id="cartaCerrar" type="button" aria-label="Cerrar la carta">✕</button>
+      <h3 id="cartaTitulo"></h3>
+      <div id="cartaCuerpo"></div>
+      <p class="firma" id="cartaFirma"></p>
+    </div>
+  </dialog>
+
+  <div class="capa-abrazo" id="capaAbrazo" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+/* ============================================================
+   Un cielo que va de la noche al amanecer a medida que bajas.
+   Colores de las fotos: tulipán rojo, hojas verdes, lámparas
+   ámbar, suéter crema y el índigo de la noche.
+   ============================================================ */
+:root {
+  --noche: #14123A;
+  --ciruela: #3B1F5C;
+  --rosa: #E86A8F;
+  --tulipan: #E0453A;
+  --hoja: #7BC144;
+  --ambar: #F7B24A;
+  --crema: #FFF3E3;
+  --lavanda: #B9A7FF;
+
+  --serif: "Young Serif", Georgia, "Times New Roman", serif;
+  --cuerpo: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mano: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--cuerpo);
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--crema);
+  background-color: var(--noche);
+  background-image: linear-gradient(180deg,
+    #14123A 0%, #1F1A4D 14%, #36215F 30%, #6A2C75 47%,
+    #A8416F 62%, #E4635F 80%, #FFB872 100%);
+}
+img, video { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; line-height: 1.12; margin: 0 0 .5em; text-wrap: balance; }
+h1 { font-size: clamp(3.1rem, 14vw, 6.6rem); text-shadow: 0 4px 30px rgba(185, 167, 255, .45); }
+h2 { font-size: clamp(2rem, 7vw, 3.4rem); }
+h3 { font-size: clamp(1.4rem, 5vw, 1.9rem); }
+p { margin: 0 0 1em; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--ambar); outline-offset: 3px; }
+
+.contenedor { position: relative; z-index: 2; max-width: 880px; margin: 0 auto; }
+.centro { text-align: center; }
+.lead { max-width: 34ch; margin: 0 auto 1.6em; font-size: 1.2rem; opacity: .95; }
+.seccion { position: relative; z-index: 2; padding: clamp(80px, 13vw, 130px) 22px; }
+.seccion.alba { color: var(--noche); }
+.seccion.alba .lead { opacity: 1; }
+
+/* ---------- Cielo ---------- */
+.cielo { position: fixed; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; }
+.estrellas { position: absolute; inset: 0; transition: opacity .3s linear; }
+.estrella {
+  position: absolute; border-radius: 50%; background: #fff;
+  animation: titilar 3.4s ease-in-out infinite alternate;
+}
+@keyframes titilar { from { opacity: .25; } to { opacity: 1; } }
+.luciernagas { position: absolute; inset: 0; transition: opacity .3s linear; }
+.luciernaga {
+  position: absolute; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--ambar);
+  box-shadow: 0 0 10px 3px rgba(247, 178, 74, .75), 0 0 26px 8px rgba(247, 178, 74, .35);
+  animation: vagar var(--dur) ease-in-out infinite alternate, parpadeo 3s ease-in-out infinite;
+  animation-delay: var(--del), var(--del);
+}
+@keyframes vagar {
+  from { transform: translate(0, 0); }
+  50%  { transform: translate(var(--x1), var(--y1)); }
+  to   { transform: translate(var(--x2), var(--y2)); }
+}
+@keyframes parpadeo { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
+
+/* ---------- Revelar al hacer scroll ---------- */
+.revela { opacity: 0; transform: translateY(22px); transition: opacity .9s ease, transform .9s ease; transition-delay: var(--r, 0s); }
+.revela.ve { opacity: 1; transform: none; }
+
+/* ---------- Inicio ---------- */
+.hero { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 70px; }
+.luna {
+  width: min(62vw, 270px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; margin-bottom: 2rem;
+  box-shadow: 0 0 0 8px rgba(255, 243, 227, .14), 0 0 0 18px rgba(185, 167, 255, .12), 0 0 90px 24px rgba(185, 167, 255, .4);
+}
+.luna img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 38%; }
+.luna.ve { animation: flotar 7s ease-in-out infinite alternate; }
+@keyframes flotar { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+.entrar {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: .6rem;
+  color: var(--crema); text-decoration: none; font-weight: 700;
+  border: 2px solid rgba(255, 243, 227, .6); border-radius: 999px; padding: .65em 1.5em;
+}
+.entrar:hover { background: rgba(255, 243, 227, .12); }
+.flecha { width: 10px; height: 10px; border-right: 3px solid currentColor; border-bottom: 3px solid currentColor; transform: rotate(45deg); animation: rebote 1.6s ease-in-out infinite; }
+@keyframes rebote { 0%, 100% { translate: 0 -3px; } 50% { translate: 0 4px; } }
+
+/* ---------- Botones ---------- */
+.boton {
+  font-family: var(--cuerpo); font-weight: 700; font-size: 1.1rem; cursor: pointer;
+  border: 0; border-radius: 999px; padding: .8em 1.9em;
+  background: var(--lavanda); color: var(--noche);
+  box-shadow: 0 6px 0 #7F6BD9, 0 14px 26px rgba(10, 8, 40, .4);
+  transition: transform .15s;
+}
+.boton:active { transform: translateY(3px); }
+.boton-calido { background: var(--ambar); box-shadow: 0 6px 0 #C07F14, 0 14px 26px rgba(40, 10, 40, .4); }
+
+/* ---------- Respiración ---------- */
+.aire-caja { position: relative; width: min(74vw, 300px); aspect-ratio: 1; margin: 2.4rem auto 2.2rem; display: grid; place-items: center; }
+.aire {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, var(--lavanda) 38%, #7C5CFF 100%);
+  box-shadow: 0 0 60px 12px rgba(185, 167, 255, .5);
+  transform: scale(.55);
+  transition: transform 6s ease-in-out;
+}
+.aire.inhala { transform: scale(1); transition-duration: 4s; }
+.aire-texto { position: relative; z-index: 1; font-family: var(--serif); font-size: 1.7rem; color: var(--noche); }
+
+/* ---------- Cómo te sientes ---------- */
+.chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin: 2rem 0 1.6rem; }
+.chip {
+  font-family: var(--cuerpo); font-weight: 700; font-size: 1.05rem; cursor: pointer;
+  color: var(--crema); background: rgba(255, 243, 227, .08);
+  border: 2px solid rgba(255, 243, 227, .5); border-radius: 999px; padding: .55em 1.3em;
+  transition: background .2s, color .2s, transform .15s;
+}
+.chip:hover { background: rgba(255, 243, 227, .2); }
+.chip[aria-pressed="true"] { background: var(--crema); color: var(--noche); border-color: var(--crema); transform: scale(1.05); }
+.mensaje {
+  max-width: 560px; margin: 0 auto; text-align: left;
+  background: var(--crema); color: var(--noche);
+  border-radius: 26px; padding: 28px 26px 18px;
+  box-shadow: 0 18px 40px rgba(10, 8, 40, .4);
+  animation: surgir .6s cubic-bezier(.2, .9, .3, 1.2);
+}
+@keyframes surgir { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+.mensaje h3 { color: #6A2C75; }
+.mensaje .gesto { font-family: var(--mano); font-size: 1.65rem; line-height: 1.2; color: var(--tulipan); margin-top: 1.1rem; }
+
+/* ---------- Ábrelo cuando… ---------- */
+.sobres { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 2rem; }
+@media (min-width: 760px) { .sobres { grid-template-columns: repeat(3, 1fr); gap: 22px; } }
+.sobre-carta {
+  position: relative; cursor: pointer; border: 0; text-align: center;
+  background: var(--tinte, var(--crema)); color: var(--noche);
+  border-radius: 14px; padding: 46px 12px 22px; min-height: 150px;
+  box-shadow: 0 12px 26px rgba(10, 8, 40, .3);
+  transform: rotate(var(--giro, 0deg));
+  transition: transform .25s, box-shadow .25s;
+  overflow: hidden;
+}
+.sobre-carta::before { /* solapa del sobre */
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 50%;
+  background: rgba(20, 18, 58, .09);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.sobre-carta:hover { transform: rotate(0) translateY(-6px) scale(1.03); box-shadow: 0 20px 34px rgba(10, 8, 40, .4); }
+.sello {
+  position: absolute; left: 50%; top: 14px; translate: -50% 0; z-index: 1;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--tulipan); color: var(--crema); display: grid; place-items: center; font-size: 1.1rem;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .3), inset 0 -3px 0 rgba(0, 0, 0, .18);
+}
+.sobre-carta small { display: block; font-weight: 700; font-size: .85rem; opacity: .8; margin-bottom: 4px; }
+.sobre-carta span.cuando { font-family: var(--mano); font-size: 1.8rem; line-height: 1.05; font-weight: 700; display: block; }
+
+/* Carta abierta */
+dialog#carta { border: 0; padding: 0; background: none; width: min(92vw, 520px); max-width: none; max-height: 88svh; color: var(--noche); }
+dialog#carta::backdrop { background: rgba(20, 18, 58, .72); backdrop-filter: blur(4px); }
+dialog#carta[open] { animation: abrir .55s cubic-bezier(.2, .9, .3, 1.15); }
+@keyframes abrir { from { opacity: 0; transform: translateY(40px) rotate(-3deg) scale(.9); } to { opacity: 1; transform: none; } }
+.papel {
+  position: relative; background: var(--crema); border-radius: 20px; padding: 34px 26px 24px;
+  border-top: 10px solid var(--tulipan);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .5);
+  max-height: 88svh; overflow-y: auto;
+}
+.papel h3 { color: #6A2C75; padding-right: 36px; }
+.papel p { font-size: 1.12rem; }
+.papel video { width: min(70%, 260px); margin: 0 auto 1.2rem; border-radius: 18px; background: #000; }
+.cerrar { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(20, 18, 58, .1); color: var(--noche); font-size: 1rem; cursor: pointer; }
+.firma { font-family: var(--mano); font-size: 1.8rem; text-align: right; color: var(--tulipan); margin: 1.2rem 0 0; }
+
+/* ---------- Postales ---------- */
+.postales { display: grid; grid-template-columns: 1fr; gap: 26px; margin-top: 2.4rem; }
+@media (min-width: 760px) { .postales { grid-template-columns: 1fr 1fr; gap: 30px; } .postal:nth-child(even) { margin-top: 48px; } }
+.postal {
+  position: relative; margin: 0; border-radius: 28px; overflow: hidden;
+  box-shadow: 0 18px 40px rgba(10, 8, 40, .4);
+  aspect-ratio: var(--ratio, 4 / 5);
+}
+.postal img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 50%); transition: transform 8s ease-out; }
+.postal.ve img { transform: scale(1.06); }
+.postal figcaption {
+  position: absolute; inset: auto 0 0 0; padding: 90px 22px 22px;
+  background: linear-gradient(transparent, rgba(20, 18, 58, .88));
+  font-family: var(--serif); font-size: clamp(1.2rem, 4.6vw, 1.5rem); line-height: 1.25; color: var(--crema);
+}
+
+/* ---------- Jardín de tulipanes ---------- */
+.jardin { display: flex; align-items: flex-end; justify-content: center; gap: clamp(4px, 2vw, 14px); margin: 2.4rem auto 0; padding-bottom: 14px; position: relative; }
+.jardin::after { content: ""; position: absolute; left: 4%; right: 4%; bottom: 0; height: 22px; border-radius: 50%; background: radial-gradient(ellipse at 50% 50%, rgba(59, 31, 92, .35), transparent 70%); }
+.tulipan { height: var(--h); width: calc(var(--h) * .3); overflow: visible; transform-origin: 50% 100%; position: relative; z-index: 1; }
+.tulipan .tallo { stroke-dasharray: 150; stroke-dashoffset: 150; transition: stroke-dashoffset 1.6s ease-out var(--d); }
+.tulipan .hoja { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(0); transition: transform .9s ease-out calc(var(--d) + .7s); }
+.tulipan .flor { transform-box: fill-box; transform-origin: 50% 100%; transform: scale(0); transition: transform 1.1s cubic-bezier(.3, 1.6, .5, 1) calc(var(--d) + 1.3s); }
+.jardin.crece .tallo { stroke-dashoffset: 0; }
+.jardin.crece .hoja, .jardin.crece .flor { transform: scale(1); }
+.jardin.crece .tulipan { animation: brisa 5s ease-in-out 4s infinite alternate; }
+@keyframes brisa { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
+
+/* ---------- Promesas ---------- */
+.promesas { list-style: none; padding: 0; margin: 2.2rem auto 0; max-width: 620px; display: grid; gap: 14px; }
+.promesas li {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--crema); color: var(--noche);
+  border-radius: 20px; padding: 18px 20px;
+  box-shadow: 0 10px 24px rgba(80, 20, 40, .2);
+}
+.promesas li::before { content: "♥"; color: var(--tulipan); font-size: 1.5rem; line-height: 1.3; flex: none; }
+
+/* ---------- Final: amanecer ---------- */
+.final { position: relative; z-index: 2; margin-top: 30px; }
+.amanecer { position: relative; height: clamp(150px, 42vw, 230px); overflow: hidden; }
+.sol {
+  position: absolute; left: 50%; bottom: -40px; width: min(58vw, 240px); aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, #FFF3E3 0 32%, #FFD27A 33% 62%, #FFB872 63%);
+  box-shadow: 0 0 90px 36px rgba(255, 210, 122, .65);
+  transform: translate(-50%, 105%);
+  transition: transform 2.6s cubic-bezier(.2, .7, .2, 1);
+}
+.amanecer.sale .sol { transform: translate(-50%, 0); }
+.colina {
+  position: relative; margin-top: -50px;
+  background: radial-gradient(120% 90% at 50% 0%, #4A2468 0%, var(--ciruela) 60%, #231044 100%);
+  border-radius: 50% 50% 0 0 / 80px 80px 0 0;
+  padding: 80px 22px 56px; color: var(--crema);
+}
+.foto-redonda { width: min(48vw, 190px); aspect-ratio: 1; border-radius: 50%; overflow: hidden; margin: 0 auto 1.4rem; border: 5px solid var(--ambar); box-shadow: 0 0 40px rgba(247, 178, 74, .5); }
+.foto-redonda img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+.colina h2 { font-size: clamp(2.1rem, 8vw, 3.6rem); }
+.abrazo-msg { min-height: 2.6em; margin: 1.2rem auto 0; font-family: var(--mano); font-size: 1.8rem; line-height: 1.15; color: #FFD27A; }
+.ayuda { max-width: 40ch; margin: 2rem auto 0; font-size: .95rem; opacity: .8; border-top: 1px solid rgba(255, 243, 227, .25); padding-top: 1.2rem; }
+.ayuda:empty { display: none; }
+
+/* Capa del abrazo */
+.capa-abrazo { position: fixed; inset: 0; z-index: 60; pointer-events: none; overflow: hidden; }
+.brillo {
+  position: fixed; width: 24px; height: 24px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 226, 150, .95), rgba(255, 184, 114, .55) 40%, transparent 70%);
+  translate: -50% -50%; animation: expande 1.8s ease-out forwards;
+}
+@keyframes expande { from { transform: scale(1); opacity: 1; } to { transform: scale(90); opacity: 0; } }
+.corazon-sube { position: absolute; bottom: -50px; line-height: 1; animation: sube linear forwards; }
+@keyframes sube {
+  from { transform: translate3d(0, 0, 0) rotate(0); opacity: 0; }
+  12% { opacity: 1; }
+  to { transform: translate3d(var(--dx), -115vh, 0) rotate(var(--rot)); opacity: 0; }
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01s !important; transition-delay: 0s !important; }
+  .luciernagas { display: none; }
+  .revela { opacity: 1; transform: none; }
+}
